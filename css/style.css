@@ -128,9 +128,18 @@ body {
 /* Now we adjust the font size in the main and we have to explicitly add the */
 /* font-weight of 400 because an h1 tag automatically adds a heigher weight. */
 /* We do a similar styling for the sub. */
+
+/* After creating our animation moveInLeft below we want to apply it to our */
+/* heading-primary-main class. We do this using animation name and animation */
+/* duration as well as a timing function if want a little more style. These */
+/* can also be written in one line as seen in the heading-primary-sub. One */
+/* thing that can be noticed when the animation finishes is that the div will */
+/* shake a little bit. There is a fix to this and it is done in the parent */
+/* element by putting backface-visibility to hidden. */
 .heading-primary {
 	color: #fff;
 	text-transform: uppercase;
+	backface-visibility: hidden;
 }
 
 .heading-primary-main {
@@ -138,6 +147,9 @@ body {
 	font-size: 60px;
 	font-weight: 400;
 	letter-spacing: 35px;
+	animation-name: moveInLeft;
+	animation-duration: 1.5s;
+	animation-timing-function: ease-out;
 }
 
 .heading-primary-sub {
@@ -145,4 +157,48 @@ body {
 	font-size: 20px;
 	font-weight: 700;
 	letter-spacing: 17.4px;
+	animation: moveInRight 1.5s ease-out;
+}
+
+/* Now we want to add css animations to the title and slogan in our header. */
+/* To do this we use the keyframes @ rule and give the animation a name. */
+/* Inside we can choose what happens at each moment of time in the animation. */
+/* We start with 0% which is before the animation starts and 100% which is */
+/* the end of the animation. So we have to start by asking what do we want */
+/* our animation to look like at the start. In our case we want it to be */
+/* invisible so we have to make the opacity 0. We should also keep in mind */
+/* that the browser is optomized to handle two changes at a time. So here we */
+/* will be doing opacity and transform. We use transform because we want our */
+/* animation to start further to the right than when it ends so we use the */
+/* translateX function to only have it transform on the x axis. We set it to */
+/* -100 so as to have it start further left than we want it and have it end */
+/* at 0 so it ends exactly where we want it to. All that's left is to add it */
+/* to the class we want to apply it to above. */
+
+@keyframes moveInLeft {
+	0% {
+		opacity: 0;
+		transform: translateX(-100px);
+	}
+	80% {
+		transform: translateX(10px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateX(0px);
+	}
+}
+
+@keyframes moveInRight {
+	0% {
+		opacity: 0;
+		transform: translateX(100px);
+	}
+	80% {
+		transform: translateX(-10px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateX(0px);
+	}
 }
