@@ -6,3 +6,70 @@ Medium green: #55c57a
 Dark green: #28b485
 
 */
+
+/* Universal selector applies to every single thing on a page. We start with */
+/* margin and padding at 0 because all browsers automatically add them. */
+
+/* We also set box sizing to border box because it changes the box */
+/* model so that the borders and the paddings are no long added to the total */
+/* width and the total height that we specify for a box. */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+/* We always specify font family inside the body tag because we want font */
+/* families to be inhereted and since the body is where we place all of our */
+/* other tags inside it makes sense to start with the body tag for thing we */
+/* want to have inhereted by all other tags. */
+
+/* We add a padding of 30px which will wrap around the entire website, not */
+/* because of inheritance, because padding is not passed down automatically */
+/* like font information. This is completely a stylistic option. */
+body {
+	font-family: "Lato", sans-serif;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 1.7;
+	color: #777;
+	padding: 30px;
+}
+
+/* We start by setting our header height to 95vh. What this means is that the */
+/* header should always be 95% of the viewport height. If we put it at 100 it */
+/* would always be at 100% of the viewport height but for our header here we */
+/* only want it at 95% */
+
+/* We then set the background image we want for our header and then we set */
+/* the background size to cover which always tries to fill the element or */
+/* viewport with the image. */
+
+/* We set background position to top in order to ensure that no matter the */
+/* size of the viewport the top of the image always stays at the top of it's */
+/* container. */
+
+/* Now we want to add a green filter over our background image and to do that */
+/* we have to add another background-image. To specify gradients we always */
+/* use background-image. We do this by putting a comma before our url linked */
+/* image and adding linear-gradient. We then use the two colors we want. We */
+/* can also specify "to right" as our first parameter and linear-gradient */
+/* will know we want our gradient to go from left to right. We can also add */
+/* bottom and this will say we want gradient from top left to bottom right. */
+
+/* To get the header to display the shape we want we use the new css propery */
+/* clip-path with the polygon function. This allows us to say what part/shape */
+/* of the image we want to keep displayed. The polygon function allows us to */
+/* pick coordinates for our shape. It starts at the top left and goes will go */
+/* clockwise. */
+.header {
+	height: 95vh;
+	background-image: linear-gradient(
+		to right bottom,
+		rgba(126, 213, 111, 0.8),
+		rgba(40, 180, 131, 0.8)),
+	url(../img/hero.jpg);
+	background-size: cover;
+	background-position: top;
+	clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+}
