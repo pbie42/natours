@@ -14,7 +14,25 @@
 	</head>
 	<body>
 		<header class="header">
-			Some text...
+			<div class="logo-box">
+				<img src="img/logo-white.png" alt="Logo" class="logo">
+			</div>
+			<!-- For our header we want to have the title of our website and it's information in it because -->
+			<!-- google and other search engines look to the h1 tag of a website to get information about it -->
+			<!-- So we want to have more than just the one word outdoors in it but we also want to size each -->
+			<!-- part differently. This is a perfect reason to use the span tag as it's designed for styling -->
+			<!-- specific parts of text. -->
+
+			<!-- We want to now have all of text centered and have it stay there no matter the size of the -->
+			<!-- screen as we are doing a responsive site. To do this we need to put our heading-primary -->
+			<!-- into a div so we can simply center the entire box. -->
+
+			<div class="text-box">
+				<h1 class="heading-primary">
+					<span class="heading-primary-main">Outdoors</span>
+					<span class="heading-primary-sub">is where life happens</span>
+				</h1>
+			</div>
 		</header>
 	</body>
 </html>

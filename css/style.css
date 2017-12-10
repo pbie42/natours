@@ -71,5 +71,78 @@ body {
 	url(../img/hero.jpg);
 	background-size: cover;
 	background-position: top;
+	position: relative;
 	clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+}
+
+/* For our logo we will be putting in the top left corner of our header we */
+/* are going to use absolute positioning. We are then going to use top and */
+/* left properties to put the image exactly where we want it to be. Now where */
+/* do the top and left measurements actually start? The reference for these */
+/* properties comes from a parent element which has it's position set to */
+/* relative. So need to set a position of relative on our header since that*/
+/* is the logo-box's parent element. */
+
+/* Now we want to specify the size of our image so we set the .logo height to */
+/* 35px and the width we will scale accordingly so it's not necessary to */
+/* specify it. */
+.logo-box {
+	position: absolute;
+	top: 40px;
+	left: 40px;
+}
+
+.logo {
+	height: 35px;
+}
+
+/* This part comes after the comments below. We place text-box here to follow */
+/* the natural flow of the html. Once again we are going to use absolute */
+/* positioning to place the text-box where we want it, but this time the top */
+/* and left will be a little different. We put them both at 50% which starts */
+/* text-box at 50% of the parent div. So now we want to have the 50% mark of */
+/* our text box to sit on the 50% mark of it's parent div. To do this we use */
+/* the transform property with the translate function. And then we just tell */
+/* the x and y positions to move -50%. This works because the translate x y */
+/* here is not in relation to the parent. It tells only the current element */
+/* to move 50% of its own size to the left and up. And last we change top to */
+/* 40% simply for stylistic reasons. */
+.text-box {
+	position: absolute;
+	top: 40%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+/* First thing we want to do is make the font color white. We set it in the */
+/* heading-primary as it is the parent element. We also want the text to be */
+/* uppercase so we use text-transform. */
+
+/* Now we want to have both parts of the text to be one on top of the other. */
+/* The best way to do this is to make them block elements as block elements */
+/* occupy the entire width that they have available. And more importantly for */
+/* this case they create line breaks after and before them. Span elements by */
+/* default are inline elements so we must use the display property to tell */
+/* the browser to display it as a block. */
+
+/* Now we adjust the font size in the main and we have to explicitly add the */
+/* font-weight of 400 because an h1 tag automatically adds a heigher weight. */
+/* We do a similar styling for the sub. */
+.heading-primary {
+	color: #fff;
+	text-transform: uppercase;
+}
+
+.heading-primary-main {
+	display: block;
+	font-size: 60px;
+	font-weight: 400;
+	letter-spacing: 35px;
+}
+
+.heading-primary-sub {
+	display: block;
+	font-size: 20px;
+	font-weight: 700;
+	letter-spacing: 17.4px;
 }
