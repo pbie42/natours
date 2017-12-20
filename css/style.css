@@ -112,6 +112,7 @@ body {
 	top: 40%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+	text-align: center;
 }
 
 /* First thing we want to do is make the font color white. We set it in the */
@@ -140,6 +141,7 @@ body {
 	color: #fff;
 	text-transform: uppercase;
 	backface-visibility: hidden;
+	margin-bottom: 60px;
 }
 
 .heading-primary-main {
@@ -201,4 +203,165 @@ body {
 		opacity: 1;
 		transform: translateX(0px);
 	}
+}
+
+@keyframes moveInBottom {
+	0% {
+		opacity: 0;
+		transform: translateY(50px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0px);
+	}
+}
+
+/* Link is a special state of a selector when it is an anchor element so it */
+/* functions as a link. There is also the visited state which is the state */
+/* when a user has already clicked on a button once before and sees the */
+/* button again. Because we don't want any of the underline we set text */
+/* decoration to none. We also want to have the same button model but with */
+/* different colors so we create sub class just for our white buttons. */
+/* now we go back up to the main button and give it a padding of 15px on top */
+/* and 40px on the left and right. We also set the display to inline-block */
+/* because at the start it is an inline element because it is only text. */
+/* We want it as an inline-block that way the box model works on this element */
+/* as if it was just a normal block element. This is something we should */
+/* always do if we want to give some padding or some width to elements. When */
+/* we refresh we can see that our btn now has it's own space. Now we want our */
+/* btn to be centered and since it is inside the text-box element we made we */
+/* can simply put text-align center inside the text-box class. We also want */
+/* space between the button and our title so we need to go into the heading */
+/* primary class and add margin to the bottom. We also want to round our */
+/* edges so we give our btn a border-radius. Once our hover and active states */
+/* are set we want to do a mild animation to make the transform of positions */
+/* even smoother. To do this we add a transition property into our main btn */
+/* class and specifiy which properties we want to animate. In this case we */
+/* want all of our btn states to be animated meaning hover and active. These */
+/* will be animated in relation to their initial state of link or visited. */
+
+.btn:link,
+.btn:visited {
+	text-transform: uppercase;
+	text-decoration: none;
+	padding: 15px 40px;
+	display: inline-block;
+	border-radius: 100px;
+	transition: all .2s;
+	position: relative;
+}
+
+/* Now we need to take care of the btn's hover state. So the first thing we */
+/* want is to have the button move up. To do that we use the transform */
+/* property. As we can see transform is a very important property that we use */
+/* for all sorts of modern css effects. We then use the translateY function */
+/* to have it move up 3px on the y axis. Now we also want to add a box shadow */
+/* onto our hove state. We don't want any box shadow on the x axis only on */
+/* the y so we have to put 0 first as box shadow always wants the x axis */
+/* first. The second position is the y axis and here we want an offset of */
+/* 10px. This will put the shadow 10px down. The third position is the blur. */
+/* We are going to put 20px because we want a realy high blur. Last is the */
+/* color that we want our shadow and in this case we want black with a bit of */
+/* transparency. */
+
+.btn:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 10px 20px rgba(0, 0, 0, .2);
+}
+
+/* We also have an active state that we want to use on the btn which is when */
+/* someone clicks on the element. We want it to move in the same direction */
+/* but a little bit further so we do the same as the hover state but 1px up. */
+/* NOTE: the -1px in our active state is in relation to the link and visited */
+/* states, not the hover state. So it will be moving -1px up from it's */
+/* original positioning. For our box shadow on active we want it to look like */
+/* the button is getting further away from the user so we want to diminish */
+/* the offset to 5px and we also want it less blurred so we set that to 10. */
+
+.btn:active {
+	transform: translateY(-1px);
+	box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+}
+
+.btn-white {
+	background-color: #fff;
+	color: #777;
+}
+
+/* We would like to add some extra effects to our btn and to do that we will */
+/* need to use pseudo elements. Pseudo elements allow us to style certain */
+/* parts of elements. For exampe we will be using the after pseudo element */
+/* that creates an element immediately after our element and we can then */
+/* style that element. The trick is to make an element that looks exactly */
+/* like the button we already have but we put it behind the button. And when */
+/* we hover out of the btn this pseudo element goes back behind. The first */
+/* thing we have to do is specify the content of the element. If we don't */
+/* add this then nothing will appear. We also have to specify the display */
+/* property which in this case we make inline-block as our btn is an inline */
+/* block. We then set the height and width to 100% and this works because */
+/* the after element is treated like a child element. So if we say we want */
+/* the width to be 100% that's 100% of the width of the btn. We do our border */
+/* radius like before and to make this btn white as well we want to make a */
+/* btn-white::after pseudo class. At this point the button looks a lot bigger */
+/* than it should. To correct this we need to place the pseudo element */
+/* directly behind the real button. We do this by using absolute positioning. */
+/* It's important to remember that absolute position looks for the first */
+/* relative positioned element it can find to use as a reference. As of this */
+/* moment it is our header, but we don't want our header to be the reference */
+/* for this pseudo element, we want it to be the real btn. So we add relative */
+/* positioning to our btn. The last thing we need to do is make the z-index */
+/* -1 to keep it behind our real button. */
+
+.btn::after {
+	content: "";
+	display: inline-block;
+	height: 100%;
+	width: 100%;
+	border-radius: 100px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -1;
+	transition: all .4s
+}
+
+.btn-white::after {
+	background-color: #fff;
+}
+
+/* Now we need to think about when we want to see our pseudo class. We want */
+/* to see it after we hover on our real btn. To do this we use the syntax */
+/* below. And we want our pseudo element to grow and to then fade out. So we */
+/* need it to be bigger when we hover. So once again we are going ot use the */
+/* transform property but this time with the scale function. Now we want to */
+/* animate the btn like we have done before. So we need to use the transition */
+/* property again. But we need to do it on the initial state above. So we add */
+/* transition after the z-index and we once again use all. Remember that when */
+/* we put all we are saying that we want all our our pseudo element's states */
+/* to be animated, so all of the ones with ::after. So now our animation is */
+/* working but we want to fine tune it a bit. So we can use other scale */
+/* functions to do this and I left the original transform commented so we can */
+/* see what we changed it from. Lastly we want to add another animation to */
+/* have the button appear from the bottom of the header. To do this we do */
+/* another @keyframe animation. */
+
+.btn:hover::after {
+	/* transform: scale(1.5); */
+	transform: scaleX(1.4) scaleY(1.6);
+	opacity: 0;
+}
+
+/* We will have several btns throughout our page but we only want this one to */
+/* be animated, so we will make a class only for the btn animation and attach */
+/* it to our header btn. We also don't want to have the animation at the same */
+/* speed as the others, maybe just 75% of the speed. So we tag that on as the */
+/* last parameter which is the delay. When we run this now we see that the */
+/* btn is visible the entire time before the animation happens, so to fix */
+/* this we need to add animation-fill-mode and set it to backwards. What this */
+/* does is adds the css of the 0% mark of the moveInBottom @keyframes */
+/* animation to the element before the animation even starts. */
+
+.btn-animated {
+	animation: moveInBottom .5s ease-out .75s;
+	animation-fill-mode: backwards;
 }
