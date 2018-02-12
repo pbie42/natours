@@ -13,10 +13,39 @@ Dark green: #28b485
 /* We also set box sizing to border box because it changes the box */
 /* model so that the borders and the paddings are no long added to the total */
 /* width and the total height that we specify for a box. */
-* {
+*,
+*::after,
+*::before {
 	margin: 0;
 	padding: 0;
-	box-sizing: border-box;
+	/* box-sizing: border-box; */
+	box-sizing: inherit;
+}
+
+/* SECTION 3 */
+/* 3.1 - Here we are going to start by refactoring our css to use rem instead */
+/* of px. To do this we need to set a global root font size. We set a global */
+/* root font size inside the html element selector. We also need to make sure */
+/* to comment out the 16px font-size we set inside the body selector. We set */
+/* it to 10px to make our lives easier when calculating the rem. I will leave */
+/* the commented px declaration so we can see how it works. Normally we would */
+/* do this right from the beginning. NOTE: whenever you have a . rem you */
+/* don't put the 0 before (eg .5rem). After refactoring we need to change */
+/* from the 10px below because it is actually bad practice to do this because */
+/* if anyone wanted to change the default font size on their browser, like */
+/* people that have a hard time seeing, they won't be able to because it will */
+/* stay at 10px. Default browser font size is 16px and that's what we want to */
+/* count on. So we will set the font-size to 100% which will set us at 16px */
+/* if the user does nothing but will also allow the user to change the size. */
+/* Also for better practice we are going to want to change the box-sizing */
+/* declaration we have set in the * selector above. It is better practice to */
+/* use the selector in the body section and change the declared value in the */
+/* * selector to inherit. Also while we are at it we should fix our * selector */
+/* to include all of the ::after and ::before elements */
+
+html {
+	/* font-size: 10px; */
+	font-size: 62.5%;
 }
 
 /* We always specify font family inside the body tag because we want font */
@@ -30,10 +59,13 @@ Dark green: #28b485
 body {
 	font-family: "Lato", sans-serif;
 	font-weight: 400;
-	font-size: 16px;
+	/* font-size: 16px; */
 	line-height: 1.7;
 	color: #777;
-	padding: 30px;
+	/* padding: 30px; */
+	padding: 3rem;
+
+	box-sizing: border-box;
 }
 
 /* We start by setting our header height to 95vh. What this means is that the */
@@ -88,12 +120,15 @@ body {
 /* specify it. */
 .logo-box {
 	position: absolute;
-	top: 40px;
-	left: 40px;
+	/* top: 40px;
+	left: 40px; */
+	top: 4rem;
+	left: 4rem;
 }
 
 .logo {
-	height: 35px;
+	/* height: 35px; */
+	height: 3.5rem;
 }
 
 /* This part comes after the comments below. We place text-box here to follow */
@@ -141,14 +176,17 @@ body {
 	color: #fff;
 	text-transform: uppercase;
 	backface-visibility: hidden;
-	margin-bottom: 60px;
+	/* margin-bottom: 60px; */
+	margin-bottom: 6rem;
 }
 
 .heading-primary-main {
 	display: block;
-	font-size: 60px;
+	/* font-size: 60px; */
+	font-size: 6rem;
 	font-weight: 400;
-	letter-spacing: 35px;
+	/* letter-spacing: 35px; */
+	letter-spacing: 3.5rem;
 	animation-name: moveInLeft;
 	animation-duration: 1.5s;
 	animation-timing-function: ease-out;
@@ -156,9 +194,11 @@ body {
 
 .heading-primary-sub {
 	display: block;
-	font-size: 20px;
+	/* font-size: 20px; */
+	font-size: 2rem;
 	font-weight: 700;
-	letter-spacing: 17.4px;
+	/* letter-spacing: 17.4px; */
+	letter-spacing: 1.75rem;
 	animation: moveInRight 1.5s ease-out;
 }
 
@@ -180,39 +220,44 @@ body {
 @keyframes moveInLeft {
 	0% {
 		opacity: 0;
-		transform: translateX(-100px);
+		/* transform: translateX(-100px); */
+		transform: translateX(-10rem);
 	}
 	80% {
-		transform: translateX(10px);
+		/* transform: translateX(10px); */
+		transform: translateX(1rem);
 	}
 	100% {
 		opacity: 1;
-		transform: translateX(0px);
+		transform: translateX(0);
 	}
 }
 
 @keyframes moveInRight {
 	0% {
 		opacity: 0;
-		transform: translateX(100px);
+		/* transform: translateX(100px); */
+		transform: translateX(10rem);
 	}
 	80% {
-		transform: translateX(-10px);
+		/* transform: translateX(-10px); */
+		transform: translateX(-1rem);
 	}
 	100% {
 		opacity: 1;
-		transform: translateX(0px);
+		transform: translateX(0);
 	}
 }
 
 @keyframes moveInBottom {
 	0% {
 		opacity: 0;
-		transform: translateY(50px);
+		/* transform: translateY(50px); */
+		transform: translateY(5rem);
 	}
 	100% {
 		opacity: 1;
-		transform: translateY(0px);
+		transform: translateY(0);
 	}
 }
 
@@ -244,11 +289,16 @@ body {
 .btn:visited {
 	text-transform: uppercase;
 	text-decoration: none;
-	padding: 15px 40px;
+	/* padding: 15px 40px; */
+	padding: 1.5rem 4rem;
 	display: inline-block;
-	border-radius: 100px;
+	/* border-radius: 100px; */
+	border-radius: 10rem;
 	transition: all .2s;
 	position: relative;
+	/* Because we had a body font-size of 16px set that we got rid of to */
+	/* convert to rem we need to set it here for the btn */
+	font-size: 1.6rem;
 }
 
 /* Now we need to take care of the btn's hover state. So the first thing we */
@@ -265,8 +315,10 @@ body {
 /* transparency. */
 
 .btn:hover {
-	transform: translateY(-3px);
-	box-shadow: 0 10px 20px rgba(0, 0, 0, .2);
+	/* transform: translateY(-3px); */
+	transform: translateY(-.3rem);
+	/* box-shadow: 0 10px 20px rgba(0, 0, 0, .2); */
+	box-shadow: 0 1rem 2rem rgba(0, 0, 0, .2);
 }
 
 /* We also have an active state that we want to use on the btn which is when */
@@ -279,8 +331,10 @@ body {
 /* the offset to 5px and we also want it less blurred so we set that to 10. */
 
 .btn:active {
-	transform: translateY(-1px);
-	box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+	/* transform: translateY(-1px); */
+	transform: translateY(-.1rem);
+	/* box-shadow: 0 5px 10px rgba(0, 0, 0, .2); */
+	box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
 }
 
 .btn-white {
@@ -317,7 +371,8 @@ body {
 	display: inline-block;
 	height: 100%;
 	width: 100%;
-	border-radius: 100px;
+	/* border-radius: 100px; */
+	border-radius: 10rem;
 	position: absolute;
 	top: 0;
 	left: 0;
